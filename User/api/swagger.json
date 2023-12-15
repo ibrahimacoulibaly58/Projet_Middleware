@@ -1,0 +1,169 @@
+{
+    "schemes": ["http"],
+    "swagger": "2.0",
+    "info": {
+        "description": "API to manage users.",
+        "title": "Projet_Middleware/User",
+        "contact": {
+            "name": "Ibrahima Coulibaly.",
+            "email": "ibrahima.coulibaly@etu.uca.fr"
+        },
+        "version": "1.0.0"
+    },
+    "basePath": "/",
+    "paths": {
+        "/users": {
+            "get": {
+                "description": "Get users.",
+                "tags": ["users"],
+                "summary": "Get users.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.User"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Something went wrong"
+                    }
+                }
+            },
+            "post": {
+                "description": "Create a new user.",
+                "tags": ["users"],
+                "summary": "Create a new user.",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "The user object to be created",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.User"
+                        }
+                    },
+                    "500": {
+                        "description": "Something went wrong"
+                    }
+                }
+            }
+        },
+        "/users/{id}": {
+            "get": {
+                "description": "Get a user.",
+                "tags": ["users"],
+                "summary": "Get a user.",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User UUID formatted ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.User"
+                        }
+                    },
+                    "422": {
+                        "description": "Cannot parse id"
+                    },
+                    "500": {
+                        "description": "Something went wrong"
+                    }
+                }
+            },
+            "put": {
+                "description": "Update a specific user by ID.",
+                "tags": ["users"],
+                "summary": "Update a specific user by ID.",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User UUID formatted ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "Updated user data",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.User"
+                        }
+                    },
+                    "422": {
+                        "description": "Cannot parse id"
+                    },
+                    "500": {
+                        "description": "Something went wrong"
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete a specific user by ID.",
+                "tags": ["users"],
+                "summary": "Delete a specific user by ID.",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User UUID formatted ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "422": {
+                        "description": "Cannot parse id"
+                    },
+                    "500": {
+                        "description": "Something went wrong"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.User": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
